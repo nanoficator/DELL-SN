@@ -14,7 +14,7 @@ public class Main {
         String filePathIn = null;
         boolean filePathIsCorrect = false;
         BufferedReader bufferedReader = null;
-        while (filePathIsCorrect == false) {
+        while (!filePathIsCorrect) {
             System.out.println("Введите путь до файла с серийными номерами:");
             try {
                 filePathIn = new BufferedReader(new InputStreamReader(System.in)).readLine().replaceAll("\"", "");
@@ -33,13 +33,14 @@ public class Main {
         int currentLine = 0;
         while (line != null) {
             currentLine++;
-            StringBuffer stringBufferLine = new StringBuffer(line);
+            line = line.replaceAll("\\s+", "");
+            StringBuilder stringBuilderLine = new StringBuilder(line);
             if (line.length() == 20) {
-                stringBufferLine.insert(16, '-');
-                stringBufferLine.insert(13, '-');
-                stringBufferLine.insert(8, '-');
-                stringBufferLine.insert(2, '-');
-                outSN.write(stringBufferLine.toString());
+                stringBuilderLine.insert(16, '-');
+                stringBuilderLine.insert(13, '-');
+                stringBuilderLine.insert(8, '-');
+                stringBuilderLine.insert(2, '-');
+                outSN.write(stringBuilderLine.toString());
                 outSN.append("\n");
             } else {
                 System.out.println("Строка " + currentLine + " не похожа на серийный номер монитора DELL. Пропускается.");
